@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <navbar />
+    <NavBar />
+    <div id="main-section"></div>
   </div>
 </template>
 

@@ -1,8 +1,10 @@
 <template>
   <div id="navbar-wrap" class="card-shadow">
-    <h2>Movie.io</h2>
-    <div>
-      <input type="text" placeholder="Find movie..." />
+    <div id="navbar">
+      <h2>Movie.io</h2>
+      <div>
+        <input type="text" placeholder="Find movie..." />
+      </div>
     </div>
   </div>
 </template>

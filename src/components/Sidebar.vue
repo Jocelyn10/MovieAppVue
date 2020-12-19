@@ -1,6 +1,7 @@
 <template>
   <div id="sidebar">
     <filters />
+    <button>Add Movie</button>
   </div>
 </template>
 

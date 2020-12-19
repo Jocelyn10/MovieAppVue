@@ -1,11 +1,16 @@
 <template>
   <div id="sidebar">
-    Filters
+    <filters />
   </div>
 </template>
 
 <script>
-export default {};
+import Filters from "../components/Filters";
+export default {
+  components: {
+    Filters,
+  },
+};
 </script>
 
 <style lang="scss" scoped>

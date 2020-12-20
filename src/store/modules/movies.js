@@ -1,7 +1,10 @@
 import movieList from "../../helpers/movie-list"
 
+const SET_SEARCH = "SET_SEARCH"
+
 const state = {
-    movies: movieList
+    movies: movieList,
+    search: ""
 }
 
 const mutations = {

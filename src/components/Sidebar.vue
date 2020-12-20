@@ -109,12 +109,14 @@ export default {
     };
   },
   methods: {
+    // This method adds another actor field
     addActor() {
       this.form.actors.push({ name: "" });
     },
     addMovie(e) {
       e.preventDefault();
 
+      // Call an action inside the store
       this.$store.dispatch("addMovie", this.form);
       this.showModal = false;
     },

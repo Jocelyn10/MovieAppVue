@@ -41,9 +41,11 @@
 
 <script>
 import Navbar from "../components/Navbar";
+import ratingMixin from "../mixins/getRatingColor";
 
 export default {
   name: "moviePreview",
+  mixins: [ratingMixin],
   components: {
     Navbar,
   },
@@ -57,13 +59,6 @@ export default {
     return {
       movie: {},
     };
-  },
-  methods: {
-    getRatingColor() {
-      if (this.movie.rating > 7) return "#5eb85e";
-      if (this.movie.rating > 4) return "#ffa809";
-      return "#e10505";
-    },
   },
   created() {
     // call from store

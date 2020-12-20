@@ -14,16 +14,17 @@ export default {
   },
   data() {
     return {
-      movies: [],
+      //movies: [], // We comment this beacause we conflit with the computed function called movies
     };
   },
   computed: {
-    /*movies() {
+    movies() {
       return this.$store.getters.getMovies;
-    }, */
+    },
   },
+  // created is used only once
   created() {
-    this.movies = this.$store.getters.getMovies;
+    //this.movies = this.$store.getters.getMovies;
   },
 };
 </script>

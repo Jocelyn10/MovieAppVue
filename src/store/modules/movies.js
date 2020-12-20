@@ -25,7 +25,7 @@ const mutations = {
         state.movies.push(movie)
     },
     [DELETE_MOVIE](state, id){
-        state.movies.slice(state.movies.findIndex(movie => movie.id === id), 1)
+        state.movies.splice(state.movies.findIndex(movie => movie.id === id), 1)
     }
 }
 

@@ -63,6 +63,7 @@ export default {
   methods: {
     deleteMovie() {
       this.$store.dispatch("deleteMovie", parseInt(this.id));
+      this.$router.push("/");
     },
   },
   created() {

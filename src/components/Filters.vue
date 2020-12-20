@@ -1,7 +1,13 @@
 <template>
   <div id="filters">
     <h3>Filters</h3>
-    <p v-for="(filter, index) in filters" :key="index">{{ filter.name }}</p>
+    <p
+      v-for="(filter, index) in filters"
+      :key="index"
+      @click="applyFilter(filter)"
+    >
+      {{ filter.name }}
+    </p>
   </div>
 </template>
 
@@ -32,6 +38,12 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    applyFilter(filter) {
+      console.log("Test : ", filter);
+      this.$store.dispatch("filter", filter);
+    },
   },
 };
 </script>

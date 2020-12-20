@@ -1,15 +1,35 @@
 <template>
   <div id="sidebar">
     <filters />
-    <button>Add Movie</button>
+    <button @click="showModal = true">Add Movie</button>
+
+    <modal v-if="showModal" @close="showModal = !showModal" />
   </div>
 </template>
 
 <script>
 import Filters from "../components/Filters";
+import Modal from "../components/modals/modalMovie";
+
 export default {
   components: {
     Filters,
+    Modal,
+  },
+  data() {
+    return {
+      showModal: false,
+      form: {
+        name: "",
+        year: "",
+        rating: "",
+        genre: "",
+        budget: "",
+        poster: "",
+        actor: [{ name: "" }],
+        storyline: "",
+      },
+    };
   },
 };
 </script>

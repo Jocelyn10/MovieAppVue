@@ -1,14 +1,73 @@
 <template>
-  <div id="movie-preview"></div>
+  <div id="movie-preview">
+    <navbar />
+    <div id="movie-container">
+      <div id="movie-poster">
+        <img :src="movie.poster" alt="Movie Poster" />
+      </div>
+      <div id="movie-info">
+        <div>
+          <h1>{{ movie.name }}</h1>
+          <h3>{{ movie.year }}</h3>
+          <h3>{{ movie.genre }}</h3>
+          <h3>
+            <span
+              id="movie-rating"
+              :style="{ 'background-color': getRatingColor() }"
+              >{{ movie.rating }}</span
+            >
+          </h3>
+          <h3>Budget : {{ movie.budget }}</h3>
+          <h3>Box Office : {{ movie.boxOffice }}</h3>
+          <h3>
+            Actors :
+            <span v-for="(actor, index) in movie.actors" :key="index">{{
+              actor.name
+            }}</span>
+          </h3>
+          <h3>
+            <strong>StoryLine: </strong>
+            {{ movie.storyline }}
+          </h3>
+        </div>
+        <div id="options">
+          <button class="edit">Edit</button>
+          <button class="delete">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import Navbar from "../components/Navbar";
+
 export default {
+  name: "moviePreview",
+  components: {
+    Navbar,
+  },
   props: {
     id: {
       type: Number,
       default: null,
     },
+  },
+  data() {
+    return {
+      movie: {},
+    };
+  },
+  methods: {
+    getRatingColor() {
+      if (this.movie.rating > 7) return "#5eb85e";
+      if (this.movie.rating > 4) return "#ffa809";
+      return "#e10505";
+    },
+  },
+  created() {
+    // call from store
+    this.movie = this.$store.getters.getMovieById(parseInt(this.id));
   },
 };
 </script>

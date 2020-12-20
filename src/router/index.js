@@ -13,7 +13,7 @@ const routes = [
   // We call the view (component) by lazy loading
   {
     path: '/movie-preview/:id',
-    name: 'MoviePreview',
+    name: 'moviePreview',
     component: () => import('../views/MoviePreview'),
     props: true
   },

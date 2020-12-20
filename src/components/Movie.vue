@@ -1,9 +1,26 @@
 <template>
-  <div class="movie"></div>
+  <div class="movie">
+    <img :src="movie.poster" alt="Movie poster" />
+    <div class="description">
+      <div class="basic-info">
+        <h3>{{ movie.name }}</h3>
+        <span>{{ movie.rating }}</span>
+        <p>{{ movie.gender }}</p>
+        <p>{{ movie.year }}</p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    movie: {
+      type: Object,
+      default: () => {},
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

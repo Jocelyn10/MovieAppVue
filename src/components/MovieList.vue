@@ -2,7 +2,7 @@
   <div id="movie-container">
     Movie List
 
-    <movie v-for="movie in movies" :key="movie.id" />
+    <movie v-for="movie in movies" :key="movie.id" :movie="movie" />
   </div>
 </template>
 

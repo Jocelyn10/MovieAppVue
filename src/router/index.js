@@ -10,6 +10,13 @@ const routes = [
     name: 'Home',
     component: Home
   },
+  // We call the view (component) by lazy loading
+  {
+    path: '/movie-preview/:id',
+    name: 'MoviePreview',
+    component: () => import('../views/MoviePreview'),
+    props: true
+  },
 ]
 
 const router = new VueRouter({

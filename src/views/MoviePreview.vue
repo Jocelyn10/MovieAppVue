@@ -1,10 +1,12 @@
 <template>
   <div id="movie-preview">
     <navbar />
+
     <div id="movie-container">
       <div id="movie-poster">
-        <img :src="movie.poster" alt="Movie Poster" />
+        <img :src="movie.poster" alt="Movie poster" />
       </div>
+
       <div id="movie-info">
         <div>
           <h1>{{ movie.name }}</h1>
@@ -17,58 +19,151 @@
               >{{ movie.rating }}</span
             >
           </h3>
-          <h3>Budget : {{ movie.budget }}</h3>
-          <h3>Box Office : {{ movie.boxOffice }}</h3>
+
+          <h3>Budget: {{ movie.budget }}</h3>
+          <h3>Box office: {{ movie.boxOffice }}</h3>
           <h3>
-            Actors :
+            Actors:
             <span v-for="(actor, index) in movie.actors" :key="index">{{
               actor.name
             }}</span>
           </h3>
           <h3>
-            <strong>StoryLine: </strong>
+            <strong>Storyline: </strong>
             {{ movie.storyline }}
           </h3>
         </div>
         <div id="options">
-          <button class="edit">Edit</button>
+          <button @click="showModal = true" class="edit">Edit</button>
           <button @click="deleteMovie" class="delete">Delete</button>
         </div>
       </div>
     </div>
+
+    <modal v-if="showModal" @close="showModal = false">
+      <template v-slot:header>
+        <h3 class="m-0">Create new movie</h3>
+      </template>
+      <template v-slot:body>
+        <form @submit.prevent="updateMovie" ref="movieForm" id="movie-form">
+          <p>Fill out the details bellow</p>
+          <input required v-model="movie.name" type="text" placeholder="Name" />
+          <input
+            required
+            v-model="movie.year"
+            type="number"
+            placeholder="Year"
+          />
+          <input
+            required
+            v-model="movie.rating"
+            type="number"
+            placeholder="Rating"
+          />
+          <input
+            required
+            v-model="movie.budget"
+            type="text"
+            placeholder="Budget"
+          />
+          <input
+            required
+            v-model="movie.poster"
+            type="text"
+            placeholder="Poster"
+          />
+          <input
+            required
+            v-model="movie.boxOffice"
+            type="text"
+            placeholder="Box Office"
+          />
+
+          <hr />
+
+          <div>
+            <div id="actor-input">
+              <p class="m-0">Actors</p>
+              <span @click="addActor" class="add-actor">+</span>
+            </div>
+
+            <input
+              required
+              v-for="(actor, index) in movie.actors"
+              :key="index"
+              v-model="movie.actors[index].name"
+              type="text"
+              placeholder="Actor"
+            />
+          </div>
+
+          <hr />
+
+          <textarea
+            required
+            v-model="movie.storyline"
+            placeholder="Storyline"
+            rows="6"
+          />
+        </form>
+      </template>
+      <template v-slot:footer>
+        <button id="update-movie" @click="$refs.movieForm.requestSubmit()">
+          Save
+        </button>
+      </template>
+    </modal>
   </div>
 </template>
 
 <script>
 import Navbar from "../components/Navbar";
 import ratingMixin from "../mixins/getRatingColor";
+import Modal from "../components/modals/modalMovie";
+import moviesApi from "../services/moviesApi";
 
 export default {
-  name: "moviePreview",
   mixins: [ratingMixin],
   components: {
     Navbar,
+    Modal,
   },
   props: {
     id: {
-      type: Number,
+      type: [String, Number],
       default: null,
     },
   },
   data() {
     return {
+      showModal: false,
       movie: {},
     };
   },
   methods: {
+    updateMovie() {
+      this.$store.dispatch("updateMovie", this.movie);
+      this.showModal = false;
+    },
     deleteMovie() {
-      this.$store.dispatch("deleteMovie", parseInt(this.id));
-      this.$router.push("/");
+      this.$store
+        .dispatch("deleteMovie", this.id)
+        .then((res) => this.$router.push("/"));
+    },
+    addActor() {
+      this.movie.actors.push({ name: "" });
     },
   },
   created() {
-    // call from store
-    this.movie = this.$store.getters.getMovieById(parseInt(this.id));
+    const movie = this.$store.getters.getMovieById(parseInt(this.id));
+    if (movie) {
+      this.movie = movie;
+    } else {
+      moviesApi
+        .getMovieById(this.id)
+        .then((res) => (this.movie = res))
+        .catch((err) => console.log(err));
+    }
   },
 };
 </script>

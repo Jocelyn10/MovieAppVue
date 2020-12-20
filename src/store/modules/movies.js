@@ -3,6 +3,7 @@ import movieList from "../../helpers/movie-list"
 const SET_SEARCH = "SET_SEARCH"
 const SET_FILTER = "SET_FILTER"
 const ADD_MOVIE = "ADD_MOVIE"
+const DELETE_MOVIE = "DELETE_MOVIE"
 
 const state = {
     movies: movieList,
@@ -22,6 +23,9 @@ const mutations = {
     },
     [ADD_MOVIE](state, movie){
         state.movies.push(movie)
+    },
+    [DELETE_MOVIE](state, id){
+        state.movies.slice(state.movies.findIndex(movie => movie.id === id), 1)
     }
 }
 
@@ -35,6 +39,9 @@ const actions = {
     addMovie({commit, state}, movie){
         movie.id = state.movies.length + 1
         commit(ADD_MOVIE, movie)
+    },
+    deleteMovie({commit}, id){
+        commit(DELETE_MOVIE, id)
     }
 }
 

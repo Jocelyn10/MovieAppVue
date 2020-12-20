@@ -5,9 +5,9 @@
       <div class="basic-info">
         <h3>{{ movie.name }}</h3>
         <span>{{ movie.rating }}</span>
-        <p>{{ movie.gender }}</p>
-        <p>{{ movie.year }}</p>
       </div>
+      <p>{{ movie.genre }}</p>
+      <p>{{ movie.year }}</p>
     </div>
   </div>
 </template>

@@ -45,6 +45,11 @@ export default {
 
   img {
     max-width: 100%;
+
+    // We fix size of image card
+    width: 300px;
+    height: 443px;
+
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.473),
       0 10px 10px rgba(0, 0, 0, 0.473);
     margin-bottom: 7px;

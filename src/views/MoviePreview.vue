@@ -130,7 +130,7 @@ export default {
   },
   props: {
     id: {
-      type: [String, Number],
+      type: [String, Number], // This means id can get Number or String
       default: null,
     },
   },

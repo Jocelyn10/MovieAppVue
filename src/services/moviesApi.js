@@ -19,11 +19,15 @@ const moviesApi = {
             id
         }
     },
-    getMovieById: async() => {
-
+    getMovieById: async(id) => {
+        const document = await db.doc(id).get()
+        return {
+            ...document.data(),
+            id
+        }
     },
-    updateMovie: async() => {
-
+    updateMovie: async(form) => {
+        return await db.doc(form.id).update(form)
     },
     deleteMovie: async() => {
 

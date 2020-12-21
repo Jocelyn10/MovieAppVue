@@ -27,6 +27,16 @@ const mutations = {
     },
     [DELETE_MOVIE](state, id){
         state.movies.splice(state.movies.findIndex(movie => movie.id === id), 1)
+    },
+    [UPDATE_MOVIE](state, movie){
+        state.movies = state.movies.map(oldMovie => {
+            // We return the informations about movie 
+            if(movie.id === oldMovie.id){
+                return movie
+            }
+
+            return oldMovie
+        })
     }
 }
 
@@ -43,6 +53,9 @@ const actions = {
     },
     deleteMovie({commit}, id){
         commit(DELETE_MOVIE, id)
+    },
+    updateMovie({commit}, movie){
+        commit(UPDATE_MOVIE, movie)
     }
 }
 

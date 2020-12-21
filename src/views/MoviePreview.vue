@@ -146,6 +146,7 @@ export default {
       this.showModal = false;
     },
     deleteMovie() {
+      // ParseInt for id is not required using Firebase
       this.$store
         .dispatch("deleteMovie", this.id)
         .then((res) => this.$router.push("/"));

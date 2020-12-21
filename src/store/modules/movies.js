@@ -61,10 +61,16 @@ const actions = {
         //commit(ADD_MOVIE, movie)
     },
     deleteMovie({commit}, id){
-        commit(DELETE_MOVIE, id)
+        movieApi.deleteMovie(id)
+        .then(res => commit(DELETE_MOVIE, res))
+        .catch(err => console.log(err))
+
+        //commit(DELETE_MOVIE, id)
     },
     updateMovie({commit}, movie){
-        commit(UPDATE_MOVIE, movie)
+        movieApi.updateMovie(movie)
+        .then(res => commit(UPDATE_MOVIE, res))
+        .catch(err => console.log(err))
     },
     fetchMovies({commit}){
         movieApi.getMovies()

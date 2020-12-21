@@ -1,13 +1,15 @@
 import movieList from "../../helpers/movie-list"
+import movieApi from "../../services/moviesApi"
 
 const SET_SEARCH = "SET_SEARCH"
 const SET_FILTER = "SET_FILTER"
 const ADD_MOVIE = "ADD_MOVIE"
 const DELETE_MOVIE = "DELETE_MOVIE"
 const UPDATE_MOVIE = "UPDATE_MOVIE"
+const SET_MOVIES = "SET_MOVIES"
 
 const state = {
-    movies: movieList,
+    movies:  [], // movieList, // This is static data from helpers
     search: '',
     filter: {
         key: 'rating',
@@ -37,6 +39,9 @@ const mutations = {
 
             return oldMovie
         })
+    },
+    [SET_MOVIES](state, movies){
+        state.movies = movies
     }
 }
 
@@ -56,6 +61,12 @@ const actions = {
     },
     updateMovie({commit}, movie){
         commit(UPDATE_MOVIE, movie)
+    },
+    fetchMovies({commit}){
+        movieApi.getMovies()
+        .then(res => commit(SET_MOVIES, res))
+        .catch(err => console.log(err))
+        
     }
 }
 

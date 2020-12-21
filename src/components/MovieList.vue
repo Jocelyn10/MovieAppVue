@@ -22,7 +22,7 @@ export default {
   },
   // created is used only once
   created() {
-    //this.movies = this.$store.getters.getMovies;
+    this.$store.dispatch("fetchMovies");
   },
 };
 </script>

@@ -12,8 +12,12 @@ const moviesApi = {
             }
         })
     },
-    addMovie: async() => {
-
+    addMovie: async(form) => {
+        const { id } = await db.add(form)
+        return {
+            ...form,
+            id
+        }
     },
     getMovieById: async() => {
 

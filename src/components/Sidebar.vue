@@ -85,7 +85,7 @@
 
 <script>
 import Filters from "./Filters";
-import Modal from "./modals/modalMovie";
+import Modal from "./modals/ModalMovie";
 
 export default {
   components: {

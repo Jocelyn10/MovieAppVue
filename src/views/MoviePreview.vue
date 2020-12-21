@@ -119,7 +119,7 @@
 <script>
 import Navbar from "../components/Navbar";
 import ratingMixin from "../mixins/getRatingColor";
-import Modal from "../components/modals/modalMovie";
+import Modal from "../components/modals/ModalMovie";
 import moviesApi from "../services/moviesApi";
 
 export default {

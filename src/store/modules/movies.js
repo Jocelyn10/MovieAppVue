@@ -53,8 +53,12 @@ const actions = {
         commit(SET_FILTER, filter)
     },
     addMovie({commit, state}, movie){
-        movie.id = state.movies.length + 1
-        commit(ADD_MOVIE, movie)
+        movieApi.addMovie(movie)
+        .then(res => commit(ADD_MOVIE, res))
+        .catch(err => console.log(err))
+
+        //movie.id = state.movies.length + 1
+        //commit(ADD_MOVIE, movie)
     },
     deleteMovie({commit}, id){
         commit(DELETE_MOVIE, id)
@@ -66,7 +70,6 @@ const actions = {
         movieApi.getMovies()
         .then(res => commit(SET_MOVIES, res))
         .catch(err => console.log(err))
-        
     }
 }
 
